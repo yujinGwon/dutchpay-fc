@@ -10,7 +10,7 @@ const renderComponent = () => {
   </RecoilRoot>
   )
 
-  const input = screen.getByTestid("input-member-names")
+  const input = screen.getByTestId("input-member-names")
   const saveButton = screen.getByText('저장')
 
   return {
@@ -27,7 +27,7 @@ describe('그룹 멤버 추가 페이지', () => {
     expect(saveButton).not.toBeNull()
   })
 
-  test('그룹 멤벌르 입력하지 않고 "저장" 버튼 클릭시, 에러 메시지를 노출한다', async () => {
+  test('그룹 멤버를 입력하지 않고 "저장" 버튼 클릭시, 에러 메시지를 노출한다', async () => {
     const { saveButton } = renderComponent()
 
     await userEvent.click(saveButton)

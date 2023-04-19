@@ -1,6 +1,6 @@
 import { Button, Container, Form, Row } from 'react-bootstrap';
 import { CenteredOverlayForm } from './CenteredOverlayForm';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { groupNameState } from '../state/groupName';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 export const CreateGroup = () => {
   const [validated, setValidated] = useState(false);
   const [validGroupName, setValidGroupName] = useState(false);
-  const [groupName, setGroupName] = useRecoilState(groupNameState);
+  const setGroupName = useSetRecoilState(groupNameState);
 
   const handleSubmit = (event) => {
     event.preventDefault()
