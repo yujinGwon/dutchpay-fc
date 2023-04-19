@@ -10,14 +10,14 @@ export const CenteredOverlayForm = ({
 }) => {
   return (
     <StyledCentralizedContainer>
-      <StyledHeader>Dutch Pay</StyledHeader>
+      <StyledLogo>Dutch Pay</StyledLogo>
 
       <OverlayWrapper>
         <Container>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <StyledRow>
               <Row className="align-items-start">
-                <StyledH2>{title}</StyledH2>
+                <StyledTitle>{title}</StyledTitle>
               </Row>
               <Row className="align-items-center">{children}</Row>
               <Row className="align-items-end">
@@ -32,7 +32,7 @@ export const CenteredOverlayForm = ({
   )
 }
 
-const StyledHeader = styled.h1`
+const StyledLogo = styled.h1`
   font-weight: 200;
   letter-spacing: 10px;
   color: slateblue;
@@ -51,7 +51,7 @@ const StyledCentralizedContainer = styled(Container)`
   gap: 10px;
 `
 
-export const StyledH2 = styled.h2`
+const StyledTitle = styled.h2`
   font-weight: 700;
   line-height: 35px;
 
@@ -60,7 +60,7 @@ export const StyledH2 = styled.h2`
   word-break: keep-all;
 `
 
-export const StyledSubmitButton = styled(Button).attrs({
+const StyledSubmitButton = styled(Button).attrs({
   type: 'submit',
 })`
   width: 60%;
@@ -76,7 +76,7 @@ export const StyledSubmitButton = styled(Button).attrs({
   }
 `
 
-export const StyledRow = styled(Row)`
+const StyledRow = styled(Row)`
   align-items: center;
   justify-content: center;
   height: 60vh;

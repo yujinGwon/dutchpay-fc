@@ -4,16 +4,15 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { groupMembersState } from '../state/groupMembers'
 import { useState } from 'react';
 import { groupNameState } from '../state/groupName'
+import styled from 'styled-components';
 
 export const AddMembers = () => {
   const [groupMembers, setGroupMemers] = useRecoilState(groupMembersState)
   const groupName = useRecoilValue(groupNameState)
   const [validated, setValidated] = useState(false)
-  const [formSubmitted, setFormSubmitted] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setFormSubmitted(true)
     setValidated(true)
   };
 
@@ -31,9 +30,13 @@ export const AddMembers = () => {
         placeholder="이름 간 띄어 쓰기"
         onTags={(value) => setGroupMemers(value.values)}
       />
-      {formSubmitted && groupMembers.length === 0 && (
-        <span>그룹 멤버들의 이름을 입력해 주세요.</span>
+      {validated && groupMembers.length === 0 && (
+        <StyledErrorMessage>그룹 멤버들의 이름을 입력해 주세요.</StyledErrorMessage>
       )}
     </CenteredOverlayForm>
   )
 }
+
+const StyledErrorMessage = styled.span`
+  color: red;
+`
