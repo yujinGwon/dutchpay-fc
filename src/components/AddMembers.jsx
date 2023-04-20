@@ -1,4 +1,4 @@
-import { CenteredOverlayForm } from './CenteredOverlayForm';
+import { CenteredOverlayForm } from './shared/CenteredOverlayForm';
 import { InputTags } from 'react-bootstrap-tagsinput'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { groupMembersState } from '../state/groupMembers'

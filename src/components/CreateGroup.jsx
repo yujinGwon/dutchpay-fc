@@ -1,4 +1,4 @@
-import { CenteredOverlayForm } from './CenteredOverlayForm'
+import { CenteredOverlayForm } from './shared/CenteredOverlayForm'
 import { useSetRecoilState } from 'recoil'
 import { groupNameState } from '../state/groupName'
 import { useState } from 'react'
@@ -28,7 +28,7 @@ export const CreateGroup = () => {
       validated={validated}
       handleSubmit={handleSubmit}
     >
-      <Form.Group controlId="validationGroupName">
+      <Form.Group>
         <Form.Control
           type="text"
           required
