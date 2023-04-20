@@ -1,6 +1,6 @@
 import { Button, Container, Form, Row } from 'react-bootstrap'
 import styled from 'styled-components'
-import { OverlayWrapper } from './shared/OverlayWrapper'
+import { OverlayWrapper } from './OverlayWrapper'
 
 export const CenteredOverlayForm = ({
   title,
