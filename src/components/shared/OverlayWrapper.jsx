@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
-export const OverlayWrapper = ( {children}) => (
-  <StyledContainer>
+export const OverlayWrapper = ( {children, padding, minHeight}) => (
+  <StyledContainer padding={padding} minHeight={minHeight}>
     {children}
   </StyledContainer>
 )
