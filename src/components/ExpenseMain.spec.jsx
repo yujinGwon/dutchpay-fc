@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 import { ExpenseMain } from "./ExpenseMain"
 import { RecoilRoot } from "recoil"
 import userEvent from "@testing-library/user-event"
@@ -112,11 +112,11 @@ describe("비용 정산 메인 페이지", () => {
       await userEvent.click(addButton)
   
     }
-    test("날짜, 내용, 결제자, 금액 데이터가 정산 리스트에 추가 된다", () => {
-      addNewExpense()
+    test("날짜, 내용, 결제자, 금액 데이터가 정산 리스트에 추가 된다", async () => {
+      await addNewExpense()
 
       const expenseListComponent = screen.getByTestId("expenseList")
-      const dateValue = within(expenseListComponent).getByText('2022-04-22')
+      const dateValue = within(expenseListComponent).getByText('2023-04-22')
       expect(dateValue).toBeInTheDocument()
 
       const descValue = within(expenseListComponent).getByText('장보기')

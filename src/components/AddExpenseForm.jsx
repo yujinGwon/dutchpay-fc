@@ -129,8 +129,8 @@ export const AddExpenseForm = () => {
                   {member}
                 </option>
               ))}
-              {/* <option>영수</option>
-                <option>영희</option> */}
+              <option>영수</option>
+                <option>영희</option>
             </Form.Select>
             <Form.Control.Feedback 
               type="invalid"
