@@ -4,6 +4,7 @@ import { ExpenseTable } from "./ExpenseTable"
 import styled from "styled-components"
 import { useRecoilValue } from "recoil"
 import { groupNameState } from "../state/groupName"
+import { SettlementSummary } from "./SettlementSummary"
 
 export const ExpenseMain = () => {
     return (
@@ -24,6 +25,7 @@ const LeftPane = () => (
     <Container>
       <AddExpenseForm />
       {/* TODO: 정산 결과 컴포넌트 랜더링 */}
+      <SettlementSummary />
     </Container>
   )
   
