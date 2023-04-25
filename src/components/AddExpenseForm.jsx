@@ -124,13 +124,15 @@ export const AddExpenseForm = () => {
               <option disabled value="">
                 누가 결제 했나요?
               </option>
-              {members.map((member) => (
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+              {members.map(member => 
                 <option key={member} value={member}>
                   {member}
                 </option>
-              ))}
-              <option>영수</option>
-                <option>영희</option>
+              )}
             </Form.Select>
             <Form.Control.Feedback 
               type="invalid"
