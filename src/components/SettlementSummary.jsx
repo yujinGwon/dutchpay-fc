@@ -23,7 +23,7 @@ export const SettlementSummary = () => {
     <div>
       <h3>2. 정산은 이렇게</h3>
       {totalExpenseAmount > 0 && groupMembersCount > 0 && (
-        <div>
+        <>
           <span>{groupMembersCount} 명이서 총 {totalExpenseAmount} 원 지출</span>
           <br />
           <span>한 사람 당 {splitAmount} 원</span>
@@ -35,7 +35,7 @@ export const SettlementSummary = () => {
             </li>
             )}
           </ul>
-        </div>
+        </>
       )}
     </div>
   )

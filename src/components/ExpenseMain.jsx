@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { useRecoilValue } from "recoil"
 import { groupNameState } from "../state/groupName"
 import { SettlementSummary } from "./SettlementSummary"
+import { ServiceLogo } from "./shared/ServiceLogo"
 
 export const ExpenseMain = () => {
     return (
@@ -23,9 +24,15 @@ export const ExpenseMain = () => {
 
 const LeftPane = () => (
     <Container>
-      <AddExpenseForm />
-      {/* TODO: 정산 결과 컴포넌트 랜더링 */}
-      <SettlementSummary />
+      <Row>
+        <ServiceLogo />
+      </Row>
+      <Row>
+        <AddExpenseForm />
+      </Row>
+      <Row>
+        <SettlementSummary />
+      </Row>
     </Container>
   )
   
