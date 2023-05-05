@@ -15,7 +15,7 @@ export const ExpenseMain = () => {
               <LeftPane />
             </Col>
             <Col>
-              <LightPane />  
+              <RightPane />  
             </Col>
           </Row>
         </Container>
@@ -24,23 +24,25 @@ export const ExpenseMain = () => {
 
 const LeftPane = () => (
     <Container>
-      <Row>
-        <ServiceLogo />
-      </Row>
-      <Row>
-        <AddExpenseForm />
-      </Row>
-      <Row>
-        <SettlementSummary />
-      </Row>
+      <StyledGapRow>
+        <Row>
+          <ServiceLogo />
+        </Row>
+        <Row>
+          <AddExpenseForm />
+        </Row>
+        <Row>
+          <SettlementSummary />
+        </Row>
+      </StyledGapRow>
     </Container>
   )
-  
-  const LightPane = () => {
+
+  const RightPane = () => {
     const groupName = useRecoilValue(groupNameState)
 
     return (
-    <StyledContainer>
+    <StyledRightPaneWrapper>
       <Row>
         <Col>
           <StyledGroupName>{groupName || '그룹 이름'}</StyledGroupName>
@@ -51,7 +53,7 @@ const LeftPane = () => (
           <ExpenseTable /> 
         </Col>
       </Row>
-    </StyledContainer>
+    </StyledRightPaneWrapper>
     )
 }
 
@@ -63,6 +65,12 @@ const StyledGroupName = styled.h2`
   text-align: center;
 `
 
-  const StyledContainer = styled(Container)`
-    padding: 100px 31px 100px 31px;
-  `
+const StyledRightPaneWrapper = styled(Container)`
+  padding: 100px 31px 100px 31px;
+`
+
+const StyledGapRow = styled(Row)`
+  gap: 5vh;
+  padding-top: 100px;
+  justify-content: center;
+`

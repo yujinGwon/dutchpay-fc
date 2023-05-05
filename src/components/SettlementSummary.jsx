@@ -2,6 +2,7 @@ import { useRecoilValue } from 'recoil'
 import { expensesState } from '../state/expenses'
 import styled from 'styled-components'
 import { StyledTitle } from './AddExpenseForm'
+import { groupMembersState } from '../state/groupMembers'
 
 export const calculateMinimunTransaction = (expenses, members, amountPerPerson) => {
   const minTransactions = []
@@ -68,8 +69,8 @@ export const calculateMinimunTransaction = (expenses, members, amountPerPerson) 
 
 export const SettlementSummary = () => {
   const expenses = useRecoilValue(expensesState)
-  //const members = useRecoilValue(groupMembersState)
-  const members = ["A", "B", "C", "D"]
+  const members = useRecoilValue(groupMembersState)
+  //const members = ["A", "B", "C", "D"]
 
   const totalExpenseAmount = parseInt(expenses.reduce(
     (prevAmount, curExpense) => prevAmount + parseInt(curExpense.amount),
@@ -89,11 +90,11 @@ export const SettlementSummary = () => {
       <StyledTitle>2. 정산은 이렇게</StyledTitle>
       {totalExpenseAmount > 0 && groupMembersCount > 0 && (
         <>
-          <span>
-            {groupMembersCount} 명이서 총 {totalExpenseAmount} 원 지출
-          </span>
-          <br />
-          <span>한 사람 당 {splitAmount} 원</span>
+          <StyledSummary>
+            <span>{groupMembersCount} 명이서 총 {totalExpenseAmount} 원 지출</span>
+            <br />
+            <span>한 사람 당 {splitAmount} 원</span>
+          </StyledSummary>
 
           <StyledUl>
             {minimumTransaction.map(({ sender, receiver, amount }, index) => (
@@ -135,4 +136,8 @@ const StyledUl = styled.ul`
       opacity: 0;
     }
   }
+`
+
+const StyledSummary = styled.div`
+  margin-top: 31px;
 `
