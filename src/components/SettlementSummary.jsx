@@ -3,6 +3,10 @@ import { expensesState } from '../state/expenses'
 import styled from 'styled-components'
 import { StyledTitle } from './AddExpenseForm'
 import { groupMembersState } from '../state/groupMembers'
+import { Button } from 'react-bootstrap'
+import { toPng } from 'html-to-image'
+import { useRef } from 'react'
+import { Download } from 'react-bootstrap-icons'
 
 export const calculateMinimunTransaction = (expenses, members, amountPerPerson) => {
   const minTransactions = []
@@ -68,6 +72,7 @@ export const calculateMinimunTransaction = (expenses, members, amountPerPerson) 
 }
 
 export const SettlementSummary = () => {
+  const wrapperElement = useRef(null)
   const expenses = useRecoilValue(expensesState)
   const members = useRecoilValue(groupMembersState)
   //const members = ["A", "B", "C", "D"]
@@ -85,8 +90,28 @@ export const SettlementSummary = () => {
     splitAmount
   )
 
+  const exportToImage = () => {
+    if(wrapperElement.current === null) {
+      return
+    }
+
+    toPng(wrapperElement.current, {
+      filter: (node) => node.tagName !== 'BUTTON',
+    })
+      .then((dataURL) => {
+        const link = document.createElement('a')
+        link.download = 'settlement-summary.png'
+        link.href = dataURL
+
+        link.click()
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={wrapperElement}>
       <StyledTitle>2. 정산은 이렇게</StyledTitle>
       {totalExpenseAmount > 0 && groupMembersCount > 0 && (
         <>
@@ -105,6 +130,9 @@ export const SettlementSummary = () => {
               </li>
             ))}
           </StyledUl>
+          <Button data-testid="btn-download" onClick={exportToImage}>
+            <Download />
+          </Button>
         </>
       )}
     </StyledWrapper>
