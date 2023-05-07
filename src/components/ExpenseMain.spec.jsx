@@ -21,13 +21,9 @@ const renderComponent = () => {
   const payerInput = screen.getByDisplayValue(/누가 결제/i)
   const addButton = screen.getByText("추가하기")
 
-  const descErrorMessage = screen.getByText(
-    "비용 내용을 입력해 주셔야 합니다."
-  )
+  const descErrorMessage = screen.getByText("비용 내용을 입력해 주셔야 합니다.")
   const payerErrorMessage = screen.getByText("결제자를 선택해 주셔야 합니다.")
-  const amountErrorMessage = screen.getByText(
-    "1원 이상의 금액을 입력해 주셔야 합니다."
-  )
+  const amountErrorMessage = screen.getByText("1원 이상의 금액을 입력해 주셔야 합니다.")
 
   return {
     dateInput,
@@ -111,44 +107,50 @@ describe("비용 정산 메인 페이지", () => {
   
 
   describe("새로운 비용이 입력되었을 때,", () => {
-
     const addNewExpense =async () => {
-      const {dateaInput, descInput, payerInput, amountInput, addButton}  = renderComponent()
-      await userEvent.type(dateaInput, '2023-04-22')
+      const {dateInput, descInput, payerInput, amountInput, addButton}  = renderComponent()
+      await userEvent.type(dateInput, '2023-05-07')
       await userEvent.type(descInput, '장보기')
       await userEvent.type(amountInput, '30000')
       await userEvent.selectOptions(payerInput, '영수')
       await userEvent.click(addButton)
-  
     }
-    test("날짜, 내용, 결제자, 금액 데이터가 정산 리스트에 추가 된다", async () => {
-      // 테스트 실패...
-      await addNewExpense()
 
+    beforeEach(async () =>{
+      await addNewExpense()
+    })
+
+    test("날짜, 내용, 결제자, 금액 데이터가 정산 리스트에 추가 된다", () => {
       const expenseListComponent = screen.getByTestId("expenseList")
-      const dateValue = within(expenseListComponent).getByText('2023-04-22')
+      const dateValue = within(expenseListComponent).getByText('2023-05-07')
       expect(dateValue).toBeInTheDocument()
 
       const descValue = within(expenseListComponent).getByText('장보기')
       expect(descValue).toBeInTheDocument()
       
-      const amountValue = within(expenseListComponent).getByText('30000')
+      const amountValue = within(expenseListComponent).getByText('30000 원')
       expect(amountValue).toBeInTheDocument()
 
       const payerValue = within(expenseListComponent).getByText('영수')
       expect(payerValue).toBeInTheDocument()
     })
 
-    test("정산 결과 또한 업데이트가 된다.", async () => {
-      await addNewExpense()
-
-      const totalText = screen.getByText(/2명 - 총 30000 원 지출/i)
+    test("정산 결과 또한 업데이트가 된다.", () => {
+      const totalText = screen.getByText(/2 명이서 총 30000 원 지출/i)
       expect(totalText).toBeInTheDocument()
       
-      const transactionText = screen.getByText(/영희가 영수에게 15000원/i)
+      const transactionText = screen.getByText(/영희가 영수에게 15000 원 보내기/i)
       expect(transactionText).toBeInTheDocument()
+    })
 
+    test("정산 결과를 이미지 파일로 저장할 수 있다", async () => {
+      await addNewExpense()
+
+      const downloadBtn = screen.getByTestId("btn-download")
+      expect(downloadBtn).toBeInTheDocument()
       
+      await userEvent.click(downloadBtn)
+      // TODO: 다운로드가 되었는지 확인할 수 있는 방법을 테스팅
     })
   })
 })
